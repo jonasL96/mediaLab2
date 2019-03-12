@@ -8,17 +8,37 @@
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script src="js/aframe-gui.js"></script>
 		<script>
+			 var changed1 = 0;
+			 var changed2 = 0;
 	    addExtra = function(){
 			  var lantern = document.getElementById('lantern');
 			  lantern.setAttribute('gltf-model', 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF/CesiumMan.gltf');
 		}
 	    playLoop = function(){
 			 var sky=document.getElementById("skybox");
+		if(changed1 == 0)
+		{
             sky.setAttribute("src","#skyTexture2");
+			changed1 = 1;
+		}
+		else if(changed1 == 1)
+		{
+            sky.setAttribute("src","#skyTexture");
+			changed1 = 0;
+		}
 		}
 	    playLoop2 = function(){
 			 var sky=document.getElementById("floor");
+		if(changed2 == 0)
+		{
             sky.setAttribute("src","#groundTexture2");
+			changed2 = 1;
+		}
+		else if(changed2 == 1)
+		{
+            sky.setAttribute("src","#groundTexture");
+			changed2 = 0;
+		}
 		}
         </script>
   </head>
