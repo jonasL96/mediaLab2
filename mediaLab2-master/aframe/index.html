@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Lab2 - VR application</title>
+    <script src="js/aframe.min.js"></script>
+    <script src="js/aframe-pointcloud-component.js"></script> 
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src="js/aframe-gui.js"></script>
+		<script>
+	    addExtra = function(){
+			  var lantern = document.getElementById('lantern');
+			  lantern.setAttribute('gltf-model', 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF/CesiumMan.gltf');
+		}
+	    playLoop = function(){
+			 var sky=document.getElementById("skybox");
+            sky.setAttribute("src","#skyTexture2");
+		}
+	    playLoop2 = function(){
+			 var sky=document.getElementById("floor");
+            sky.setAttribute("src","#groundTexture2");
+		}
+        </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+			<img id="groundTexture" src="floor.png">
+			<img id="groundTexture2" src="VGTU-logo.png">
+		 <img id="skyTexture" src="sky.png">
+		 <img id="skyTexture2" src="sky2.png">
+      </a-assets>
+	  <a-plane id="floor" src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
+      <a-light type="ambient" color="#445451"></a-light>
+      <a-light type="point" intensity="2" position="2 4 4"></a-light>
+      <a-sky id="skybox" height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
+      <a-entity laser-controls line="color: red; opacity: 0.75"></a-entity>
+<a-entity hand-controls="left"></a-entity>
+<a-entity hand-controls="right"></a-entity>
+
+<a-gui-flex-container 
+			flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" 
+			opacity="0.7" width="3.5" height="4.5"
+			position="-2 2.5 -4" rotation="0 0 0"
+		>
+			<a-gui-button 
+				width="2.5" id="btn1" height="0.75"
+				onclick="addExtra" key-code="32"
+				value="Load an object"
+				font-family="Arial"
+				margin="0 0 0.05 0"
+			>
+			</a-gui-button>
+
+			<a-gui-button 
+				width="2.5" id="btn1" height="0.75"
+				onclick="playLoop" key-code="32"
+				value="Change Sky"
+				font-family="Arial"
+				margin="0 0 0.05 0"
+			>
+			</a-gui-button>
+			<a-gui-button 
+				width="2.5" id="btn1" height="0.75"
+				onclick="playLoop2" key-code="32"
+				value="Change Ground"
+				font-family="Arial"
+				margin="0 0 0.05 0"
+			>
+			</a-gui-button>
+
+		</a-gui-flex-container>
+      <a-pointcloud 
+        scale="0.1 0.1 0.1" id="object"
+        position="0 0.08 -2.5" 
+        rotation="-90 45 0" 
+        src="url(sculpt.ply)" 
+        size="0.01">
+
+      </a-pointcloud>
+<a-gltf-model id="lantern" src="#lantern" position="-2 2 -4"></a-gltf-model>
+	<!-- Camera + cursor. -->
+		<a-entity id="cameraRig" position="0 1.6 0">
+			<a-camera look-controls wasd-controls position="-1 0 0">
+				<a-gui-cursor id="cursor"
+						  raycaster="objects: [gui-interactable]"
+						  fuse="true" fuse-timeout="2000"
+						  design="dot"
+				>
+				</a-gui-cursor> <!-- /cursor -->
+			</a-camera> <!-- /camera -->
+		</a-entity>
+
+    </a-scene>
+			
+  </body>
+</html>
