@@ -1,3 +1,6 @@
+Tested on 
+Firefox on Linux
+Chromium on Linux
 # mediaLab2
 
 This lab aims to build your first Virtual reality (VR) app.
